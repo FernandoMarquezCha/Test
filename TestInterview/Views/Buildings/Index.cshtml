@@ -1,0 +1,46 @@
+﻿@using TestInterview.Models
+@model List<BuildingsCLS>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3>Buildings</h3>
+
+
+
+<br />
+<hr />
+@Html.ActionLink("Add Building", "Create", "Buildings", new { @class = "btn btn-primary" })
+<hr />
+
+<table class="table table-hover table-bordered, table-responsive">
+    <thead>
+        <tr style="font-weight:500">
+            <td>@Html.LabelFor(model => Model[0].pkbuilding)</td>
+            <td>@Html.LabelFor(model => Model[0].building)</td>
+           
+            
+            <td>Operaciones</td>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.pkbuilding</td>
+                <td>@item.building</td>
+              
+           
+                <td>
+                    @Html.ActionLink(" ", "Editar", "Buildings", new { id = item.pkbuilding }, new { @class = "far fa-edit btn btn-primary" })
+                    @Html.ActionLink(" ", "Deshabilitar", "Buildings", new { id = item.pkbuilding }, new { @class = "fas fa-trash-alt btn btn-danger" })
+
+                </td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+

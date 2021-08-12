@@ -1,0 +1,47 @@
+﻿@using TestInterview.Models
+@model List<ConsultaDinamicaCLS>
+@{
+    ViewBag.Title = "Index";
+    
+}
+
+
+<h3>Active part numbers</h3>
+
+
+
+
+<br />
+
+<table class="table table-hover table-bordered, table-responsive">
+    <thead>
+        <tr style="font-weight:500">
+            <td>@Html.LabelFor(model => Model[0].partnumbers)</td>
+            <td>@Html.LabelFor(model => Model[0].customer)</td>
+            <td>@Html.LabelFor(model => Model[0].building)</td>
+
+
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.partnumbers</td>
+                <td>@item.customer</td>
+                <td>@item.building</td>
+
+
+
+
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
+

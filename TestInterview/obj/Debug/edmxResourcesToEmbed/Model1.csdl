@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CarlosMárquezModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Buildings">
+    <Key>
+      <PropertyRef Name="PKBuilding" />
+    </Key>
+    <Property Name="PKBuilding" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Building" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Avaliable" Type="Boolean" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK__Customers__FKBui__398D8EEE" FromRole="Buildings" ToRole="Customers" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="PKCustomers" />
+    </Key>
+    <Property Name="PKCustomers" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Customer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Prefix" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="FKBuildings" Type="Int32" />
+    <Property Name="Avaliable" Type="Boolean" />
+    <NavigationProperty Name="Buildings" Relationship="Self.FK__Customers__FKBui__398D8EEE" FromRole="Customers" ToRole="Buildings" />
+    <NavigationProperty Name="PartNumbers" Relationship="Self.FK__PartNumbe__FKCus__3C69FB99" FromRole="Customers" ToRole="PartNumbers" />
+  </EntityType>
+  <EntityType Name="PartNumbers">
+    <Key>
+      <PropertyRef Name="PKPartNumber" />
+    </Key>
+    <Property Name="PKPartNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PartNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FKCustomer" Type="Int32" />
+    <Property Name="Avaliable" Type="Boolean" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK__PartNumbe__FKCus__3C69FB99" FromRole="PartNumbers" ToRole="Customers" />
+  </EntityType>
+  <Association Name="FK__Customers__FKBui__398D8EEE">
+    <End Role="Buildings" Type="Self.Buildings" Multiplicity="0..1" />
+    <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buildings">
+        <PropertyRef Name="PKBuilding" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="FKBuildings" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PartNumbe__FKCus__3C69FB99">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+    <End Role="PartNumbers" Type="Self.PartNumbers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="PKCustomers" />
+      </Principal>
+      <Dependent Role="PartNumbers">
+        <PropertyRef Name="FKCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CarlosMárquezEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Buildings" EntityType="Self.Buildings" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" />
+    <EntitySet Name="PartNumbers" EntityType="Self.PartNumbers" />
+    <AssociationSet Name="FK__Customers__FKBui__398D8EEE" Association="Self.FK__Customers__FKBui__398D8EEE">
+      <End Role="Buildings" EntitySet="Buildings" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PartNumbe__FKCus__3C69FB99" Association="Self.FK__PartNumbe__FKCus__3C69FB99">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="PartNumbers" EntitySet="PartNumbers" />
+    </AssociationSet>
+    <EntitySet Name="AvaliableTypes" EntityType="CarlosMárquezModel.AvaliableTypes" />
+    <FunctionImport Name="Add_Building">
+      <Parameter Name="Building" Mode="In" Type="String" />
+      <Parameter Name="Avaliable" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="Add_Customer">
+      <Parameter Name="Customer" Mode="In" Type="String" />
+      <Parameter Name="PREFIX" Mode="In" Type="String" />
+      <Parameter Name="FKBuilding" Mode="In" Type="Int32" />
+      <Parameter Name="Avaliable" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="Add_PartNumbers">
+      <Parameter Name="PartNumber" Mode="In" Type="String" />
+      <Parameter Name="FKCustomer" Mode="In" Type="Int32" />
+      <Parameter Name="Avaliable" Mode="In" Type="Boolean" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="AvaliableTypes">
+    <Key>
+      <PropertyRef Name="AvaliableID" />
+    </Key>
+    <Property Name="AvaliableID" Type="Int32" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Value" Type="Int32" />
+  </EntityType>
+</Schema>

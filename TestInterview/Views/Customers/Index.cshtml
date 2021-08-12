@@ -1,0 +1,55 @@
+﻿@using TestInterview.Models
+@model  List<CustomersClS>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3>Customers</h3>
+
+
+
+
+<br />
+<hr />
+@Html.ActionLink("Add Customer", "Create", "Customers", new { @class = "btn btn-primary" })
+<hr />
+
+<table class="table table-hover table-bordered, table-responsive">
+    <thead>
+        <tr style="font-weight:500">
+            <td>@Html.LabelFor(model => Model[0].pkcustomers)</td>
+            <td>@Html.LabelFor(model => Model[0].customer)</td>
+            <td>@Html.LabelFor(model => Model[0].prefix)</td>
+            <td>@Html.LabelFor(model => Model[0].building)</td>
+           
+
+
+
+            <td>Operaciones</td>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.pkcustomers</td>
+            <td>@item.customer</td>
+            <td>@item.prefix</td>
+            <td>@item.buildingname</td>
+           
+
+
+
+            <td>
+                @Html.ActionLink(" ", "Editar", "Buildings", new { id = item.pkcustomers }, new { @class = "far fa-edit btn btn-primary" })
+                @Html.ActionLink(" ", "Deshabilitar", "Buildings", new { id = item.pkcustomers }, new { @class = "fas fa-trash-alt btn btn-danger" })
+
+            </td>
+
+        </tr>
+        }
+    </tbody>
+
+</table>
+

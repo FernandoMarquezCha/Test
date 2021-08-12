@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CarlosMárquezModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AvaliableTypes">
+    <Key>
+      <PropertyRef Name="AvaliableID" />
+    </Key>
+    <Property Name="AvaliableID" Type="int" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="30" />
+    <Property Name="Value" Type="int" />
+  </EntityType>
+  <EntityType Name="Buildings">
+    <Key>
+      <PropertyRef Name="PKBuilding" />
+    </Key>
+    <Property Name="PKBuilding" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Building" Type="varchar(max)" />
+    <Property Name="Avaliable" Type="bit" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="PKCustomers" />
+    </Key>
+    <Property Name="PKCustomers" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Customer" Type="varchar(max)" />
+    <Property Name="Prefix" Type="varchar" MaxLength="5" />
+    <Property Name="FKBuildings" Type="int" />
+    <Property Name="Avaliable" Type="bit" />
+  </EntityType>
+  <EntityType Name="PartNumbers">
+    <Key>
+      <PropertyRef Name="PKPartNumber" />
+    </Key>
+    <Property Name="PKPartNumber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PartNumber" Type="varchar" MaxLength="50" />
+    <Property Name="FKCustomer" Type="int" />
+    <Property Name="Avaliable" Type="bit" />
+  </EntityType>
+  <Association Name="FK__Customers__FKBui__398D8EEE">
+    <End Role="Buildings" Type="Self.Buildings" Multiplicity="0..1" />
+    <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buildings">
+        <PropertyRef Name="PKBuilding" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="FKBuildings" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PartNumbe__FKCus__3C69FB99">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+    <End Role="PartNumbers" Type="Self.PartNumbers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="PKCustomers" />
+      </Principal>
+      <Dependent Role="PartNumbers">
+        <PropertyRef Name="FKCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="Add_Building" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Building" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Avaliable" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Add_Customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Customer" Type="varchar(max)" Mode="In" />
+    <Parameter Name="PREFIX" Type="varchar" Mode="In" />
+    <Parameter Name="FKBuilding" Type="int" Mode="In" />
+    <Parameter Name="Avaliable" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Add_PartNumbers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PartNumber" Type="varchar(max)" Mode="In" />
+    <Parameter Name="FKCustomer" Type="int" Mode="In" />
+    <Parameter Name="Avaliable" Type="bit" Mode="In" />
+  </Function>
+  <EntityContainer Name="CarlosMárquezModelStoreContainer">
+    <EntitySet Name="AvaliableTypes" EntityType="Self.AvaliableTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Buildings" EntityType="Self.Buildings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PartNumbers" EntityType="Self.PartNumbers" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Customers__FKBui__398D8EEE" Association="Self.FK__Customers__FKBui__398D8EEE">
+      <End Role="Buildings" EntitySet="Buildings" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PartNumbe__FKCus__3C69FB99" Association="Self.FK__PartNumbe__FKCus__3C69FB99">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="PartNumbers" EntitySet="PartNumbers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

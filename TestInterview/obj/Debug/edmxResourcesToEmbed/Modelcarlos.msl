@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CarlosMárquezModel1StoreContainer" CdmEntityContainer="CarlosMárquezEntities1">
+    <EntitySetMapping Name="AvaliableTypes">
+      <EntityTypeMapping TypeName="CarlosMárquezModel1.AvaliableTypes">
+        <MappingFragment StoreEntitySet="AvaliableTypes">
+          <ScalarProperty Name="AvaliableID" ColumnName="AvaliableID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Buildings">
+      <EntityTypeMapping TypeName="CarlosMárquezModel1.Buildings">
+        <MappingFragment StoreEntitySet="Buildings">
+          <ScalarProperty Name="PKBuilding" ColumnName="PKBuilding" />
+          <ScalarProperty Name="Building" ColumnName="Building" />
+          <ScalarProperty Name="Avaliable" ColumnName="Avaliable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="CarlosMárquezModel1.Customers">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="PKCustomers" ColumnName="PKCustomers" />
+          <ScalarProperty Name="Customer" ColumnName="Customer" />
+          <ScalarProperty Name="Prefix" ColumnName="Prefix" />
+          <ScalarProperty Name="FKBuildings" ColumnName="FKBuildings" />
+          <ScalarProperty Name="Avaliable" ColumnName="Avaliable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PartNumbers">
+      <EntityTypeMapping TypeName="CarlosMárquezModel1.PartNumbers">
+        <MappingFragment StoreEntitySet="PartNumbers">
+          <ScalarProperty Name="PKPartNumber" ColumnName="PKPartNumber" />
+          <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+          <ScalarProperty Name="FKCustomer" ColumnName="FKCustomer" />
+          <ScalarProperty Name="Avaliable" ColumnName="Avaliable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Add_Building" FunctionName="CarlosMárquezModel1.Store.Add_Building" />
+    <FunctionImportMapping FunctionImportName="Add_Customer" FunctionName="CarlosMárquezModel1.Store.Add_Customer" />
+    <FunctionImportMapping FunctionImportName="Add_PartNumbers" FunctionName="CarlosMárquezModel1.Store.Add_PartNumbers" />
+  </EntityContainerMapping>
+</Mapping>

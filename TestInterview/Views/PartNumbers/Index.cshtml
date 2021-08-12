@@ -1,0 +1,53 @@
+﻿@using TestInterview.Models;
+@model List<PartNumbersCLS>
+@{
+    ViewBag.Title = "Index";
+   
+}
+
+<h3>Part Numbers</h3>
+
+<br />
+<hr />
+@Html.ActionLink("Add Part Number", "Create", "PartNumbers", new { @class = "btn btn-primary" })
+<hr />
+
+<table class="table table-hover table-bordered, table-responsive">
+    <thead>
+        <tr style="font-weight:500">
+            <td>@Html.LabelFor(model => Model[0].pkpartnumber)</td>
+            <td>@Html.LabelFor(model => Model[0].partnumber)</td>
+            <td>@Html.LabelFor(model => Model[0].customer)</td>
+          
+            
+
+
+
+            <td>Operaciones</td>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.pkpartnumber</td>
+                <td>@item.partnumber</td>
+                <td>@item.customername</td>
+            
+                
+
+
+
+                <td>
+                    @Html.ActionLink(" ", "Editar", "Buildings", new { id = item.pkpartnumber }, new { @class = "far fa-edit btn btn-primary" })
+                    @Html.ActionLink(" ", "Deshabilitar", "Buildings", new { id = item.pkpartnumber }, new { @class = "fas fa-trash-alt btn btn-danger" })
+
+                </td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+
